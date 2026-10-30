@@ -2,7 +2,7 @@
 title: Fable Discover (Drift)
 summary: A browse experience that finds books by how their covers look and feel. I prototyped it with vision embeddings and LLM-tagged "vibes", and it shipped on Fable as Discover.
 order: 2
-role: "TODO: e.g. PM, built the prototype end to end"
+role: Product manager. Built the prototype end to end
 timeframe: "2026"
 stack: [Python, PyTorch, DINOv2, SigLIP, Claude API, scikit-learn]
 metrics:
@@ -48,10 +48,12 @@ exact top-60 neighbors at every slider stop, so the app needs no server.
 **Near-duplicate filter.** Anything above 0.95 DINOv2 similarity to the anchor is dropped.
 Those are reissues of the same cover, not discoveries.
 
-**Vibes.** To give people a starting point besides "type a book", Claude tagged each cover
-with a 4–6 word vibe (e.g. "brooding gilt romantasy opulence"), and the prompt forbade words
-from the title or author. I embedded the tags and clustered them with k-means into 25
-microgenres, then named each by hand from its exemplars.
+**Vibes (proof of concept).** I also tested whether covers alone could define microgenres and
+assign books to them. Claude tagged each cover with a 4–6 word vibe (e.g. "brooding gilt
+romantasy opulence"), and the prompt forbade words from the title or author. I embedded the
+tags and clustered them with k-means into 25 microgenres, then named each by hand from its
+exemplars. In the prototype, these became "vibe doors": browsable shelves like *Crimson
+obsession* and *Sunny meet-cute*.
 
 **Interface.** The anchor book sits in the center, with similar covers packed around it.
 Distance from the center maps to similarity rank. Click any cover to re-center and drift.
@@ -86,11 +88,12 @@ qualitative on purpose:
 - **Naming the vibe builds trust.** Showing the tag on the center book made people trust the
   wall more, because the machine said why.
 
-The prototype became [Discover on fable.co](https://fable.co/discover), which adds building
-a shelf as you browse, saving it to your Fable library, and sharing it by link.
+After I handed it off, the cover-similarity browser shipped with light changes as
+[Discover on fable.co](https://fable.co/discover). The live version lets you build a shelf as
+you browse, save it to your Fable library, and share it by link. The vibe doors stayed a proof
+of concept and didn't ship.
 
-TODO: Your role in the production launch, and any usage or engagement numbers you can share
-publicly.
+TODO: Any usage or engagement numbers you can share publicly.
 
 ## What I'd do next
 
@@ -100,4 +103,5 @@ publicly.
   behind an API.
 - **Expand past the top 10K books.** Embedding is cheap and tagging scales linearly; the
   deduplication has to come along.
-- **Turn vibe naming and art into an editorial or generative process** so it scales past 25.
+- **Bring the microgenres to the product** as browse shelves, with an editorial or generative
+  process for naming them so it scales past 25.
