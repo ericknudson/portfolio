@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import CourseNameGenerator from '../../components/CourseNameGenerator.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+
+// Interactive demos, keyed by project id. Rendered above the case-study body.
+const demos: Record<string, typeof CourseNameGenerator> = {
+	'som-course-name-generator': CourseNameGenerator,
+};
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({
+		params: { slug: project.id },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const Demo = demos[project.id];
+---
+
+<ProjectLayout project={project.data}>
+	{Demo && <Demo slot="demo" />}
+	<Content />
+</ProjectLayout>

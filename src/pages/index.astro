@@ -1,16 +1,93 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.find((p) => p.data.featured);
+const others = projects.filter((p) => p !== featured);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+	<section class="intro">
+		<h1>Eric Knudson</h1>
+		<p class="lede">Product manager who ships production code.</p>
+		<p>TODO: Two or three sentences on the problems you work on and the roles you're looking for.</p>
+	</section>
+
+	{featured && (
+		<section class="featured" aria-labelledby="featured-heading">
+			<p class="eyebrow">Featured case study</p>
+			<h2 id="featured-heading"><a href={`/projects/${featured.id}`}>{featured.data.title}</a></h2>
+			<p>{featured.data.summary}</p>
+			<a href={`/projects/${featured.id}`}>Read the case study →</a>
+		</section>
+	)}
+
+	<section aria-labelledby="projects-heading">
+		<h2 id="projects-heading">More projects</h2>
+		<ul class="project-list">
+			{others.map((p) => (
+				<li>
+					<a href={`/projects/${p.id}`}>{p.data.title}</a>
+					<p>{p.data.summary}</p>
+				</li>
+			))}
+		</ul>
+	</section>
+</BaseLayout>
+
+<style>
+	.intro h1 {
+		font-size: 2.25rem;
+		margin-bottom: 0;
+	}
+
+	.lede {
+		font-size: 1.25rem;
+		color: var(--muted);
+		margin-top: 0.25rem;
+	}
+
+	.featured {
+		margin: 3rem 0;
+		padding: 1.5rem;
+		border: 1px solid var(--rule);
+		border-radius: 8px;
+	}
+
+	.featured h2 {
+		margin: 0.25rem 0 0.5rem;
+	}
+
+	.featured h2 a {
+		color: var(--text);
+		text-decoration: none;
+	}
+
+	.eyebrow {
+		margin: 0;
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+
+	.project-list {
+		list-style: none;
+		padding: 0;
+	}
+
+	.project-list li {
+		padding: 1rem 0;
+		border-top: 1px solid var(--rule);
+	}
+
+	.project-list li a {
+		font-weight: 600;
+	}
+
+	.project-list li p {
+		margin: 0.25rem 0 0;
+		color: var(--muted);
+	}
+</style>

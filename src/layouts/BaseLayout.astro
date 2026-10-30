@@ -1,0 +1,100 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = 'Eric Knudson — product manager who ships production code.' } = Astro.props;
+const pageTitle = title ? `${title} · Eric Knudson` : 'Eric Knudson';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+	</head>
+	<body>
+		<header class="site-header">
+			<a href="/" class="name">Eric Knudson</a>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer class="site-footer">
+			<p>© {new Date().getFullYear()} Eric Knudson</p>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--text: #1a1a1a;
+		--muted: #666;
+		--bg: #fdfdfc;
+		--rule: #e6e6e3;
+		--accent: #2f5bea;
+		--measure: 40rem;
+		font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+		line-height: 1.6;
+		color: var(--text);
+		background: var(--bg);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--text: #ececea;
+			--muted: #9a9a96;
+			--bg: #141414;
+			--rule: #2a2a28;
+			--accent: #8aa6ff;
+		}
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		margin: 0 auto;
+		max-width: var(--measure);
+		padding: 0 1.25rem;
+	}
+
+	a {
+		color: var(--accent);
+	}
+
+	h1,
+	h2,
+	h3 {
+		line-height: 1.25;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.site-header {
+		padding: 2rem 0 1rem;
+	}
+
+	.site-header .name {
+		color: var(--text);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.site-footer {
+		margin-top: 4rem;
+		padding: 1.5rem 0 3rem;
+		border-top: 1px solid var(--rule);
+		color: var(--muted);
+		font-size: 0.875rem;
+	}
+</style>
