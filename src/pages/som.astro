@@ -1,0 +1,114 @@
+---
+// Standalone page served at som.eknudson.com (see vercel.json). Colors are from the original app.
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Made-up Yale SOM course names from a bigram Markov model trained on the real course catalog." />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>SOM Course Generator</title>
+	</head>
+	<body>
+		<main>
+			<p class="eyebrow">Yale SOM Course Generator</p>
+			<h1 aria-live="polite" data-course>&nbsp;</h1>
+			<button type="button" data-generate>Create course</button>
+		</main>
+		<footer>
+			<a href="https://www.eknudson.com/projects/som-course-name-generator">How it works</a>
+			<span aria-hidden="true">·</span>
+			<a href="https://www.eknudson.com">Eric Knudson</a>
+		</footer>
+	</body>
+</html>
+
+<script>
+	import { generateCourseName } from '../lib/som-generator';
+
+	const course = document.querySelector<HTMLElement>('[data-course]')!;
+	const show = () => (course.textContent = generateCourseName());
+	document.querySelector('[data-generate]')!.addEventListener('click', show);
+	show();
+</script>
+
+<style>
+	:root {
+		--yale-blue: #00356b;
+		--light-blue: #63aaff;
+		font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+		background: var(--yale-blue);
+		color: var(--light-blue);
+	}
+
+	body {
+		margin: 0;
+		min-height: 100dvh;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	main {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem 1.25rem;
+	}
+
+	.eyebrow {
+		margin: 0;
+		font-size: 0.8125rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		opacity: 0.8;
+	}
+
+	h1 {
+		max-width: 36rem;
+		min-height: 3.6em;
+		margin: 1.5rem 0;
+		font-size: clamp(1.75rem, 6vw, 2.75rem);
+		line-height: 1.2;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	button {
+		font: inherit;
+		font-size: 1.125rem;
+		font-weight: 600;
+		padding: 0.75rem 1.75rem;
+		border: 0;
+		border-radius: 10px;
+		background: var(--light-blue);
+		color: var(--yale-blue);
+		cursor: pointer;
+	}
+
+	button:hover {
+		box-shadow: 0 5px 50px -10px rgba(0, 0, 0, 0.9);
+	}
+
+	button:active {
+		opacity: 0.8;
+	}
+
+	footer {
+		padding: 1.5rem;
+		font-size: 0.875rem;
+	}
+
+	footer a {
+		color: var(--light-blue);
+	}
+
+	footer span {
+		margin: 0 0.5rem;
+	}
+</style>

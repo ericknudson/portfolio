@@ -36,9 +36,9 @@ Display order is set by `order` in frontmatter.
 
 | Project | Code | Live |
 | --- | --- | --- |
-| Your Name in Miles | github.com/ericknudson/your-name-in-miles | your-name-in-miles.vercel.app |
+| Your Name in Miles | github.com/ericknudson/your-name-in-miles (private) | your-name-in-miles.vercel.app |
 | Fable Discover (Drift) | (not public) | fable.co/discovery |
-| SOM Course Name Generator | github.com/ericknudson/som-course-generator | Runs in the browser on its project page. The old Heroku app is gone. |
+| SOM Course Name Generator | github.com/ericknudson/som-course-generator | som.eknudson.com, plus the widget on its project page. The old Heroku app is gone. |
 | King County Home Price Predictor | github.com/ericknudson/king-county-home-price-generator | knudson.shinyapps.io/kingcounty |
 
 The `som-course-generator` repo's `master` branch was later repurposed as a **Fable club** name
@@ -56,6 +56,15 @@ generator (commit `4f00028`, May 2022). The SOM course version is the commit bef
 - `src/pages/projects/[slug].astro` — builds one static page per project entry. Its `demos` map
   attaches an interactive component (from `src/components/`) to a project, shown above the body.
 - `src/data/` — static data for demos, e.g. `som-courses.json` for the SOM course generator.
+- `src/lib/som-generator.ts` — the course generator logic, shared by the project-page widget
+  and the standalone page.
+- `src/pages/som.astro` — the standalone generator. `vercel.json` rewrites `som.eknudson.com/`
+  to `/som`.
+
+## Deploying
+
+Vercel project `eric-e09c/portfolio` deploys every push to `main` to www.eknudson.com
+(`eknudson.com` redirects there). Other branches get preview URLs.
 
 ## Case-study body convention
 
