@@ -37,7 +37,7 @@ Display order is set by `order` in frontmatter.
 | Project | Code | Live |
 | --- | --- | --- |
 | Your Name in Miles | github.com/ericknudson/your-name-in-miles (private) | your-name-in-miles.vercel.app |
-| Fable Discover (Drift) | (not public) | fable.co/discovery |
+| Fable Discover (Drift) | (not public; internal Fable code) | fable.co/discover |
 | SOM Course Name Generator | github.com/ericknudson/som-course-generator | som.eknudson.com, plus the widget on its project page. The old Heroku app is gone. |
 | King County Home Price Predictor | github.com/ericknudson/king-county-home-price-generator | knudson.shinyapps.io/kingcounty |
 
