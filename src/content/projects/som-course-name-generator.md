@@ -1,10 +1,18 @@
 ---
 title: SOM Course Name Generator
-summary: A bigram Markov model trained on the Yale SOM course catalog that writes new course names, weird but still believable.
+summary: >-
+  A bigram Markov model trained on every Yale SOM course name that writes new ones, weird
+  but believable, like *Innovation In Capital & Wine*. Unigrams produced nonsense and trigrams
+  just recreated real courses, so bigrams were the sweet spot. I made it as part of Yale's
+  CS 577 Natural Language Processing course.
 order: 3
 role: Solo project
 timeframe: "2020"
 stack: [Python, Flask, NumPy, TypeScript]
+media:
+  type: image
+  src: /media/som-course-name-generator.png
+  alt: "The SOM Course Generator showing a generated course name, Current Issues In Data Analysis Using Stata, with a Create course button."
 links:
   - { label: "Live", href: "https://som.eknudson.com" }
   - { label: "Code", href: "https://github.com/ericknudson/som-course-generator" }

@@ -1,0 +1,143 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	media: CollectionEntry<'projects'>['data']['media'];
+	title: string;
+	/** Live URL, shown in the frame's address bar so it reads as another site. */
+	url?: string;
+}
+
+const { media, title, url } = Astro.props;
+const host = url
+	? (({ host, pathname }) => host.replace(/^www\./, '') + pathname.replace(/\/$/, ''))(new URL(url))
+	: undefined;
+---
+
+<figure class="frame">
+	<div class="bar" aria-hidden="true">
+		<span class="dots"><i></i><i></i><i></i></span>
+		{host && <span class="address">{host}</span>}
+	</div>
+	{media?.type === 'video' && (
+		<video
+			src={media.src}
+			poster={media.poster}
+			aria-label={media.alt}
+			title="Click to replay"
+			tabindex="0"
+			muted
+			playsinline
+			preload="metadata"
+		/>
+	)}
+	{media?.type === 'image' && <img src={media.src} alt={media.alt} />}
+	{!media && <div class="placeholder"><p>TODO: Screenshot or short video of {title}.</p></div>}
+</figure>
+
+<script>
+	// Play each video once, when it first scrolls into view, then rest on the last frame.
+	// Click (or Enter/Space) replays it. With reduced motion, nothing autoplays.
+	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const videos = document.querySelectorAll<HTMLVideoElement>('.frame video');
+
+	const replay = (v: HTMLVideoElement) => {
+		v.currentTime = 0;
+		v.play();
+	};
+
+	videos.forEach((v) => {
+		v.addEventListener('click', () => replay(v));
+		v.addEventListener('keydown', (e) => {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				replay(v);
+			}
+		});
+	});
+
+	if (!reduced) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						(entry.target as HTMLVideoElement).play();
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.6 },
+		);
+		videos.forEach((v) => observer.observe(v));
+	}
+</script>
+
+<style>
+	.frame {
+		margin: 0;
+		border: 1px solid var(--rule);
+		border-radius: 10px;
+		overflow: hidden;
+		background: var(--bg);
+		box-shadow: 0 8px 24px rgb(0 0 0 / 0.08);
+	}
+
+	.bar {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.4rem 0.75rem;
+		border-bottom: 1px solid var(--rule);
+		font-size: 0.75rem;
+		color: var(--muted);
+	}
+
+	.dots {
+		display: flex;
+		gap: 0.3rem;
+	}
+
+	.dots i {
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background: var(--rule);
+	}
+
+	.address {
+		flex: 1;
+		text-align: center;
+		margin-right: 2rem; /* balance the dots so the address sits centered */
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.frame video {
+		cursor: pointer;
+	}
+
+	.frame img,
+	.frame video {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.placeholder {
+		display: grid;
+		place-items: center;
+		aspect-ratio: 16 / 10;
+		padding: 1rem;
+		color: var(--muted);
+		text-align: center;
+		font-size: 0.875rem;
+		background: repeating-linear-gradient(-45deg, transparent 0 10px, var(--rule) 10px 11px);
+	}
+
+	.placeholder p {
+		margin: 0;
+		padding: 0.25rem 0.5rem;
+		background: var(--bg);
+	}
+</style>

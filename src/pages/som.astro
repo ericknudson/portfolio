@@ -1,5 +1,6 @@
 ---
 // Standalone page served at som.eknudson.com (see vercel.json). Colors are from the original app.
+import { showCaseStudies } from '../lib/site';
 ---
 
 <html lang="en">
@@ -17,7 +18,7 @@
 			<button type="button" data-generate>Create course</button>
 		</main>
 		<footer>
-			<a href="https://www.eknudson.com/projects/som-course-name-generator">How it works</a>
+			<a href={showCaseStudies ? "https://www.eknudson.com/projects/som-course-name-generator" : "https://www.eknudson.com/#som-course-name-generator"}>How it works</a>
 			<span aria-hidden="true">·</span>
 			<a href="https://www.eknudson.com">Eric Knudson</a>
 		</footer>

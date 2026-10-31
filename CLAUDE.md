@@ -24,22 +24,22 @@ whether it works.
 
 Display order is set by `order` in frontmatter.
 
-1. **Your Name in Miles** — *lead case study*, the only `featured: true` entry. Present it as a
-   **ranking system with an evaluation**: how candidates are generated and scored, how ranking
-   quality was measured (metrics, baselines, test set), and what the results showed. The
-   evaluation is the centerpiece, not a footnote.
-2. **Fable Discover (Drift)**
+All projects are presented equally; there is no featured case study.
+
+1. **Fable Dis*cover*** (Drift). The title is written `Fable Dis*cover*`: `*…*` in a title renders
+   as italics (`src/lib/inline.ts`); so does `*…*` in a summary.
+2. **Your Name in Miles**: present it as a **ranking system with an evaluation**: how candidates
+   are generated and scored, how ranking quality was measured (metrics, baselines, test set), and
+   what the results showed. The evaluation is the centerpiece, not a footnote.
 3. **SOM Course Name Generator**
-4. **King County Home Price Predictor**
 
 ### Sources
 
 | Project | Code | Live |
 | --- | --- | --- |
-| Your Name in Miles | github.com/ericknudson/your-name-in-miles (private) | your-name-in-miles.vercel.app |
+| Your Name in Miles | github.com/ericknudson/your-name-in-miles (private) | miles.eknudson.com |
 | Fable Discover (Drift) | (not public; internal Fable code) | fable.co/discover |
 | SOM Course Name Generator | github.com/ericknudson/som-course-generator | som.eknudson.com, plus the widget on its project page. The old Heroku app is gone. |
-| King County Home Price Predictor | github.com/ericknudson/king-county-home-price-generator | knudson.shinyapps.io/kingcounty |
 
 The `som-course-generator` repo's `master` branch was later repurposed as a **Fable club** name
 generator (commit `4f00028`, May 2022). The SOM course version is the commit before it, `773462d`.
@@ -52,9 +52,15 @@ generator (commit `4f00028`, May 2022). The SOM course version is the commit bef
 - `src/layouts/BaseLayout.astro` — HTML shell, global styles, header and footer.
 - `src/layouts/ProjectLayout.astro` — case-study page: title, summary, meta (role, timeframe,
   stack, links), an optional key-results strip (`metrics`), then the Markdown body.
-- `src/pages/index.astro` — home: intro, the featured case study, then the other projects.
+- `src/pages/index.astro` — home: intro, then the project list. Each project shows its title,
+  `summary` (a short first-person overview), links and media.
+- `src/lib/site.ts` — `showCaseStudies`. Currently `false`: the case-study pages aren't built
+  and the home page links to each live site instead. The Markdown bodies are kept for later.
 - `src/pages/projects/[slug].astro` — builds one static page per project entry. Its `demos` map
   attaches an interactive component (from `src/components/`) to a project, shown above the body.
+- `src/components/ProjectMedia.astro` — the screenshot or video for each project on the home page, shown beside its text in a browser-window frame,
+  set by `media` in frontmatter (files in `public/media/<slug>.*`). Shows a dashed `TODO:`
+  placeholder when `media` is missing.
 - `src/data/` — static data for demos, e.g. `som-courses.json` for the SOM course generator.
 - `src/lib/som-generator.ts` — the course generator logic, shared by the project-page widget
   and the standalone page.

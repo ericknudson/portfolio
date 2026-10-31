@@ -1,7 +1,13 @@
 ---
-title: Fable Discover (Drift)
-summary: A browse experience that finds books by how their covers look and feel. I prototyped it with vision embeddings and LLM-tagged "vibes", and it shipped on Fable as Discover.
-order: 2
+title: Fable Dis*cover*
+summary: >-
+  Most book recommendation systems lean on metadata like genre and publisher descriptions,
+  and ignore the cover, even though publishers put a lot of work into making covers signal a
+  book's vibe. I took Fable's 10,000 most-shelved books, stripped out everything but the cover
+  image, and built a new browsing experience that finds covers that feel alike. The first model I tried (SigLIP)
+  mostly read the title text, so I switched to DINOv2 for visual style and blended in a separate
+  color signal. After I handed off the prototype, it shipped as Discover on fable.co.
+order: 1
 role: Product manager. Built the prototype end to end
 timeframe: "2026"
 stack: [Python, PyTorch, DINOv2, SigLIP, Claude API, scikit-learn]
@@ -9,15 +15,25 @@ metrics:
   - { label: "Most-shelved books embedded", value: "10K" }
   - { label: "Microgenres from clustered vibe tags", value: "25" }
   - { label: "Tags in the requested 4–6 words", value: "~96%" }
+media:
+  type: video
+  src: /media/fable-discover.mp4
+  poster: /media/fable-discover.jpg
+  alt: "The Fable Discover landing page: a search box over a slowly drifting wall of book covers."
 links:
   - { label: "Live", href: "https://fable.co/discover" }
 ---
 
 ## Problem
 
-Fable's discovery surfaces were driven by metadata: genre, lists and social signals. But
-people browse a bookstore table by look and feel, and covers aren't accidental. Publishers
-pay to make a thriller look like a thriller and a romantasy look like a romantasy.
+Most book recommendation systems, Fable's included, lean on metadata: genre, publisher
+descriptions, lists and social signals. They don't use the cover. Meanwhile, publishers put a
+lot of effort into designing and choosing covers, so that a thriller looks like a thriller and
+a romantasy looks like a romantasy.
+
+When I wander around a bookstore, that's mostly what I'm doing: sizing up whether a book is my
+vibe. We judge books by their covers. I wanted to know whether covers actually encode a book's
+vibe.
 
 **Hypothesis:** cover similarity on its own is a useful discovery signal ("another book that
 *feels* like this one") and can power browsing at a finer grain than any genre field.
@@ -30,7 +46,8 @@ it demoable enough that stakeholders could feel the answer rather than read abou
 I built a seven-step pipeline and a single-file static web app, called Drift.
 
 **Candidates.** The covers of Fable's 10,000 most-shelved books, deduplicated by book family
-so that alternate editions don't crowd the results.
+so that alternate editions don't crowd the results. I stripped out all other data about each
+book, so the models saw nothing but the cover image.
 
 **Three similarity signals.**
 

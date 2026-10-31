@@ -1,35 +1,48 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectMedia from '../components/ProjectMedia.astro';
+import { inlineHtml, plainText } from '../lib/inline';
+import { showCaseStudies } from '../lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const featured = projects.find((p) => p.data.featured);
-const others = projects.filter((p) => p !== featured);
 ---
 
-<BaseLayout>
+<BaseLayout showHeader={false}>
 	<section class="intro">
+		<img class="headshot" src="/eric.jpg" alt="Eric Knudson, smiling, in a cap and glasses outdoors" width="240" height="240" />
 		<h1>Eric Knudson</h1>
-		<p class="lede">Product manager who ships production code.</p>
-		<p>TODO: Two or three sentences on the problems you work on and the roles you're looking for.</p>
+		<p>
+			Previously at Palantir, Fable, Promise. Currently training for C2C, learning Korean, and
+			prototyping. This is a home for some of the software projects I’ve worked on.
+		</p>
 	</section>
 
-	{featured && (
-		<section class="featured" aria-labelledby="featured-heading">
-			<p class="eyebrow">Featured case study</p>
-			<h2 id="featured-heading"><a href={`/projects/${featured.id}`}>{featured.data.title}</a></h2>
-			<p>{featured.data.summary}</p>
-			<a href={`/projects/${featured.id}`}>Read the case study →</a>
-		</section>
-	)}
-
 	<section aria-labelledby="projects-heading">
-		<h2 id="projects-heading">More projects</h2>
+		<h2 id="projects-heading">Projects</h2>
 		<ul class="project-list">
-			{others.map((p) => (
-				<li>
-					<a href={`/projects/${p.id}`}>{p.data.title}</a>
-					<p>{p.data.summary}</p>
+			{projects.map((p) => (
+				<li id={p.id}>
+					<div class="text">
+						<h3>
+							{showCaseStudies ? (
+								<a href={`/projects/${p.id}`} set:html={inlineHtml(p.data.title)} />
+							) : (
+								<span set:html={inlineHtml(p.data.title)} />
+							)}
+						</h3>
+						<p set:html={inlineHtml(p.data.summary)} />
+						{p.data.links.length > 0 && (
+							<ul class="links">
+								{p.data.links.map((l) => <li><a href={l.href}>{l.label} ↗</a></li>)}
+							</ul>
+						)}
+					</div>
+					<ProjectMedia
+						media={p.data.media}
+						title={plainText(p.data.title)}
+						url={p.data.links.find((l) => l.label.startsWith('Live'))?.href}
+					/>
 				</li>
 			))}
 		</ul>
@@ -37,57 +50,71 @@ const others = projects.filter((p) => p !== featured);
 </BaseLayout>
 
 <style>
+	.headshot {
+		display: block;
+		width: 7.5rem;
+		height: 7.5rem;
+		border-radius: 50%;
+		object-fit: cover;
+		margin-top: 2rem;
+	}
+
 	.intro h1 {
 		font-size: 2.25rem;
 		margin-bottom: 0;
 	}
 
-	.lede {
-		font-size: 1.25rem;
-		color: var(--muted);
-		margin-top: 0.25rem;
-	}
-
-	.featured {
-		margin: 3rem 0;
-		padding: 1.5rem;
-		border: 1px solid var(--rule);
-		border-radius: 8px;
-	}
-
-	.featured h2 {
-		margin: 0.25rem 0 0.5rem;
-	}
-
-	.featured h2 a {
-		color: var(--text);
-		text-decoration: none;
-	}
-
-	.eyebrow {
-		margin: 0;
-		font-size: 0.75rem;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--muted);
-	}
 
 	.project-list {
 		list-style: none;
 		padding: 0;
 	}
 
-	.project-list li {
-		padding: 1rem 0;
+	.project-list > li {
+		display: grid;
+		gap: 1rem;
+		padding: 2rem 0;
 		border-top: 1px solid var(--rule);
 	}
 
-	.project-list li a {
-		font-weight: 600;
+	/* Side by side on wider screens: text left, framed media right. The list
+	   breaks out of the 40rem text column so the media has room. */
+	@media (min-width: 52rem) {
+		.project-list {
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+			width: min(64rem, 100vw - 2.5rem);
+		}
+
+		.project-list > li {
+			grid-template-columns: 2fr 3fr;
+			gap: 2.5rem;
+			align-items: center;
+		}
 	}
 
-	.project-list li p {
-		margin: 0.25rem 0 0;
+	.text h3 {
+		margin: 0;
+		font-size: 1.125rem;
+	}
+
+	.text h3 a {
+		color: var(--text);
+	}
+
+	.text p {
+		margin: 0.5rem 0 0;
 		color: var(--muted);
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		list-style: none;
+		padding: 0;
+		margin: 0.75rem 0 0;
+		font-size: 0.875rem;
 	}
 </style>

@@ -2,9 +2,15 @@
 interface Props {
 	title?: string;
 	description?: string;
+	/** The small site-name link at the top. The home page hides it, since its h1 is the name. */
+	showHeader?: boolean;
 }
 
-const { title, description = 'Eric Knudson — product manager who ships production code.' } = Astro.props;
+const {
+	title,
+	description = 'Eric Knudson — product manager who ships production code.',
+	showHeader = true,
+} = Astro.props;
 const pageTitle = title ? `${title} · Eric Knudson` : 'Eric Knudson';
 ---
 
@@ -19,9 +25,11 @@ const pageTitle = title ? `${title} · Eric Knudson` : 'Eric Knudson';
 		<title>{pageTitle}</title>
 	</head>
 	<body>
-		<header class="site-header">
-			<a href="/" class="name">Eric Knudson</a>
-		</header>
+		{showHeader && (
+			<header class="site-header">
+				<a href="/" class="name">Eric Knudson</a>
+			</header>
+		)}
 		<main>
 			<slot />
 		</main>

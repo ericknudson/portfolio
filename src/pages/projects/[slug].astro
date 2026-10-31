@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import CourseNameGenerator from '../../components/CourseNameGenerator.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import { showCaseStudies } from '../../lib/site';
 
 // Interactive demos, keyed by project id. Rendered above the case-study body.
 const demos: Record<string, typeof CourseNameGenerator> = {
@@ -9,6 +10,7 @@ const demos: Record<string, typeof CourseNameGenerator> = {
 };
 
 export async function getStaticPaths() {
+	if (!showCaseStudies) return [];
 	const projects = await getCollection('projects');
 	return projects.map((project) => ({
 		params: { slug: project.id },

@@ -1,8 +1,12 @@
 ---
 title: Your Name in Miles
-summary: Spell any word with letters found in real GPS tracks. Under the hood it's a ranking system that searches thousands of route stretches for each letter and puts the most legible one first.
-order: 1
-featured: true
+summary: >-
+  Spell any word with letters found in my Strava GPS tracks. Each letter is one continuous
+  stretch of a real run, ride or hike. Under the hood it's a ranking problem: for each letter I
+  generate candidate stretches across 172 activities, score them by how closely they match the
+  letter's shape and by a handwriting model trained on EMNIST, then re-rank so the runners-up
+  aren't the same stretch of road. Inspired by NASA's *Your Name in Landsat*.
+order: 2
 role: "TODO"
 timeframe: "TODO"
 stack: [Python, PyTorch, NumPy, SciPy]
@@ -10,8 +14,13 @@ metrics: []
 # metrics:
 #   - { label: "Top pick legible (hand-labeled)", value: "TODO" }
 #   - { label: "Activities searched", value: "172" }
+media:
+  type: video
+  src: /media/your-name-in-miles.mp4
+  poster: /media/your-name-in-miles.jpg
+  alt: "Typing ERIC into Your Name in Miles: each letter draws in as a real GPS route as it is typed."
 links:
-  - { label: "Live", href: "https://your-name-in-miles.vercel.app" }
+  - { label: "Live", href: "https://miles.eknudson.com" }
 ---
 
 ## Problem

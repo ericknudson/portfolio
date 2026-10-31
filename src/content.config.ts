@@ -8,11 +8,19 @@ const projects = defineCollection({
 		title: z.string(),
 		summary: z.string(),
 		order: z.number(),
-		featured: z.boolean().default(false),
 		role: z.string().optional(),
 		timeframe: z.string().optional(),
 		stack: z.array(z.string()).default([]),
 		metrics: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
+		// Large-format screenshot or video shown with the project on the home page. Files live in public/media/.
+		media: z
+			.object({
+				type: z.enum(['image', 'video']),
+				src: z.string(),
+				alt: z.string(),
+				poster: z.string().optional(),
+			})
+			.optional(),
 		links: z.array(z.object({ label: z.string(), href: z.url() })).default([]),
 	}),
 });
