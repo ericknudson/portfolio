@@ -12,6 +12,9 @@ const {
 	showHeader = true,
 } = Astro.props;
 const pageTitle = title ? `${title} · Eric Knudson` : 'Eric Knudson';
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+// Link previews (iMessage, Slack, LinkedIn…) use the headshot rather than the first image on the page.
+const previewImage = new URL('/eric.jpg', Astro.site);
 ---
 
 <html lang="en">
@@ -23,6 +26,17 @@ const pageTitle = title ? `${title} · Eric Knudson` : 'Eric Knudson';
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
+		<link rel="canonical" href={pageUrl} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Eric Knudson" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={pageUrl} />
+		<meta property="og:image" content={previewImage} />
+		<meta property="og:image:width" content="480" />
+		<meta property="og:image:height" content="480" />
+		<meta property="og:image:alt" content="Eric Knudson" />
+		<meta name="twitter:card" content="summary" />
 	</head>
 	<body>
 		{showHeader && (

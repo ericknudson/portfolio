@@ -8,7 +8,10 @@ import { showCaseStudies } from '../lib/site';
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout showHeader={false}>
+<BaseLayout
+	showHeader={false}
+	description="Previously at Palantir, Fable, Promise. Currently training for C2C, learning Korean, and prototyping. A home for some of the software tools I’ve built."
+>
 	<section class="intro">
 		<img class="headshot" src="/eric.jpg" alt="Eric Knudson, smiling, in a cap and glasses outdoors" width="240" height="240" />
 		<h1>Eric Knudson</h1>
