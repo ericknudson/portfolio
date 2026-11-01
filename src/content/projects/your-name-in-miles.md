@@ -6,7 +6,7 @@ summary: >-
   generate candidate stretches across 172 activities, score them by how closely they match the
   letter's shape and by a handwriting model trained on EMNIST, then re-rank so the runners-up
   aren't the same stretch of road. Inspired by NASA's *Your Name in Landsat*.
-order: 2
+order: 3
 role: "TODO"
 timeframe: "TODO"
 stack: [Python, PyTorch, NumPy, SciPy]

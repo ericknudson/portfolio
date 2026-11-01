@@ -19,6 +19,8 @@ const projects = defineCollection({
 				src: z.string(),
 				alt: z.string(),
 				poster: z.string().optional(),
+				/** Shown under the frame, e.g. to note that a screenshot uses illustrative data. */
+				caption: z.string().optional(),
 			})
 			.optional(),
 		links: z.array(z.object({ label: z.string(), href: z.url() })).default([]),

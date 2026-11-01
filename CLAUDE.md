@@ -28,10 +28,13 @@ All projects are presented equally; there is no featured case study.
 
 1. **Fable Dis*cover*** (Drift). The title is written `Fable Dis*cover*`: `*…*` in a title renders
    as italics (`src/lib/inline.ts`); so does `*…*` in a summary.
-2. **Your Name in Miles**: present it as a **ranking system with an evaluation**: how candidates
+2. **User Feedback Digest**: anonymized. Never name the company or product domain, and never use
+   real counts, feature names or user quotes from it. The screenshot uses notional data and
+   says so in its caption.
+3. **Your Name in Miles**: present it as a **ranking system with an evaluation**: how candidates
    are generated and scored, how ranking quality was measured (metrics, baselines, test set), and
    what the results showed. The evaluation is the centerpiece, not a footnote.
-3. **SOM Course Name Generator**
+4. **SOM Course Name Generator**
 
 ### Sources
 
@@ -39,6 +42,7 @@ All projects are presented equally; there is no featured case study.
 | --- | --- | --- |
 | Your Name in Miles | github.com/ericknudson/your-name-in-miles (private) | miles.eknudson.com |
 | Fable Discover (Drift) | (not public; internal Fable code) | fable.co/discover |
+| User Feedback Digest | (not public) | (internal; no public link) |
 | SOM Course Name Generator | github.com/ericknudson/som-course-generator | som.eknudson.com, plus the widget on its project page. The old Heroku app is gone. |
 
 The `som-course-generator` repo's `master` branch was later repurposed as a **Fable club** name

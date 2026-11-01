@@ -14,7 +14,8 @@ const host = url
 	: undefined;
 ---
 
-<figure class="frame">
+<figure class="media">
+<div class="frame">
 	<div class="bar" aria-hidden="true">
 		<span class="dots"><i></i><i></i><i></i></span>
 		{host && <span class="address">{host}</span>}
@@ -33,6 +34,8 @@ const host = url
 	)}
 	{media?.type === 'image' && <img src={media.src} alt={media.alt} />}
 	{!media && <div class="placeholder"><p>TODO: Screenshot or short video of {title}.</p></div>}
+</div>
+	{media?.caption && <figcaption>{media.caption}</figcaption>}
 </figure>
 
 <script>
@@ -73,8 +76,17 @@ const host = url
 </script>
 
 <style>
-	.frame {
+	.media {
 		margin: 0;
+	}
+
+	figcaption {
+		margin-top: 0.5rem;
+		font-size: 0.8125rem;
+		color: var(--muted);
+	}
+
+	.frame {
 		border: 1px solid var(--rule);
 		border-radius: 10px;
 		overflow: hidden;
