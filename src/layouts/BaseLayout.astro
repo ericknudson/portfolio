@@ -1,4 +1,6 @@
 ---
+import { email, linkedin } from '../lib/site';
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -49,7 +51,7 @@ const previewImage = new URL('/eric.jpg', Astro.site);
 			<slot />
 		</main>
 		<footer class="site-footer">
-			<p>© {new Date().getFullYear()} Eric Knudson</p>
+			<p>© {new Date().getFullYear()} Eric Knudson · <a href={`mailto:${email}`}>{email}</a> · <a href={linkedin}>LinkedIn</a></p>
 		</footer>
 	</body>
 </html>
