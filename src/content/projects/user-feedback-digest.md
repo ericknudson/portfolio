@@ -7,7 +7,7 @@ summary: >-
   a human-curated list of feature requests. The result was a searchable, ranked view of what
   users want, with real quotes one click away, and a weekly Slack digest that corrects for which
   users are over-represented in the feedback.
-order: 2
+order: 3
 media:
   type: image
   src: /media/user-feedback-digest.png
