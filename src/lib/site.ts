@@ -8,4 +8,4 @@ export const linkedin = 'https://www.linkedin.com/in/eknudson/';
 
 // One-line byline, shown under the name on the home page and used as the default meta description.
 export const byline =
-	"PM in San Francisco, previously at Fable and Palantir. This is a home for side projects I've worked on.";
+	"PM in San Francisco, previously at Fable and Palantir. Here are some of the things I've made!";
