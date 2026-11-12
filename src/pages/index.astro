@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectMedia from '../components/ProjectMedia.astro';
 import { inlineHtml, plainText } from '../lib/inline';
-import { byline, email, linkedin, showCaseStudies } from '../lib/site';
+import { byline, showCaseStudies } from '../lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -13,7 +13,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 		<img class="headshot" src="/eric.jpg" alt="Eric Knudson, smiling, in a cap and glasses outdoors" width="240" height="240" />
 		<h1>Eric Knudson</h1>
 		<p>{byline}</p>
-		<p class="contact">Email me at <a href={`mailto:${email}`}>{email}</a> or find me on <a href={linkedin}>LinkedIn</a>.</p>
 	</section>
 
 	<section aria-label="Projects">
@@ -27,7 +26,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 							) : (
 								<span set:html={inlineHtml(p.data.title)} />
 							)}
-							{p.data.timeframe && <>{' '}<span class="year">{p.data.timeframe}</span></>}
 						</h2>
 						{/* A blank line in a summary starts a new paragraph. */}
 						{p.data.summary.split(/\n+/).map((para) => <p set:html={inlineHtml(para)} />)}
@@ -96,12 +94,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 	.text h2 {
 		margin: 0;
 		font-size: 1.125rem;
-	}
-
-	.year {
-		font-size: 0.875rem;
-		font-weight: 400;
-		color: var(--muted);
 	}
 
 	.text h2 a {
