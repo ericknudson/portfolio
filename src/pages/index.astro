@@ -3,34 +3,32 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectMedia from '../components/ProjectMedia.astro';
 import { inlineHtml, plainText } from '../lib/inline';
-import { email, linkedin, showCaseStudies } from '../lib/site';
+import { byline, email, linkedin, showCaseStudies } from '../lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout
-	showHeader={false}
-	description="I’m a product manager who writes production code, previously at Fable and Palantir. This is where the tools I build end up."
->
+<BaseLayout showHeader={false}>
 	<section class="intro">
 		<img class="headshot" src="/eric.jpg" alt="Eric Knudson, smiling, in a cap and glasses outdoors" width="240" height="240" />
 		<h1>Eric Knudson</h1>
+		<p>{byline}</p>
 		<p class="contact">Email me at <a href={`mailto:${email}`}>{email}</a> or find me on <a href={linkedin}>LinkedIn</a>.</p>
 	</section>
 
-	<section aria-labelledby="projects-heading">
-		<h2 id="projects-heading">Projects</h2>
+	<section aria-label="Projects">
 		<ul class="project-list">
 			{projects.map((p) => (
 				<li id={p.id}>
 					<div class="text">
-						<h3>
+						<h2>
 							{showCaseStudies ? (
 								<a href={`/projects/${p.id}`} set:html={inlineHtml(p.data.title)} />
 							) : (
 								<span set:html={inlineHtml(p.data.title)} />
 							)}
-						</h3>
+							{p.data.timeframe && <>{' '}<span class="year">{p.data.timeframe}</span></>}
+						</h2>
 						{/* A blank line in a summary starts a new paragraph. */}
 						{p.data.summary.split(/\n+/).map((para) => <p set:html={inlineHtml(para)} />)}
 						{p.data.links.length > 0 && (
@@ -95,12 +93,18 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 		}
 	}
 
-	.text h3 {
+	.text h2 {
 		margin: 0;
 		font-size: 1.125rem;
 	}
 
-	.text h3 a {
+	.year {
+		font-size: 0.875rem;
+		font-weight: 400;
+		color: var(--muted);
+	}
+
+	.text h2 a {
 		color: var(--text);
 	}
 

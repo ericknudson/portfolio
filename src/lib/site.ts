@@ -5,3 +5,7 @@ export const showCaseStudies = false;
 // Public contact address, shown in the home-page intro and the footer of every page.
 export const email = 'eric.a.knudson@gmail.com';
 export const linkedin = 'https://www.linkedin.com/in/eknudson/';
+
+// One-line byline, shown under the name on the home page and used as the default meta description.
+export const byline =
+	"PM in San Francisco, previously at Fable and Palantir. This is a home for side projects I've worked on.";

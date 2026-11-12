@@ -1,5 +1,5 @@
 ---
-import { email, linkedin } from '../lib/site';
+import { byline, email, linkedin } from '../lib/site';
 
 interface Props {
 	title?: string;
@@ -10,7 +10,7 @@ interface Props {
 
 const {
 	title,
-	description = 'Eric Knudson — product manager who ships production code.',
+	description = byline,
 	showHeader = true,
 } = Astro.props;
 const pageTitle = title ? `${title} · Eric Knudson` : 'Eric Knudson';
