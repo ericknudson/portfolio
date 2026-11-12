@@ -13,7 +13,7 @@ summary: >-
   back into the day, which is a way to remember how it felt and feel some pride in what you did.
 order: 1
 role: "TODO"
-timeframe: "TODO"
+timeframe: "2026"
 stack: [Python, PyTorch, NumPy, SciPy]
 metrics: []
 # metrics:

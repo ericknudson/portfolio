@@ -8,6 +8,7 @@ summary: >-
   users want, with real quotes one click away, and a weekly Slack digest that corrects for which
   users are over-represented in the feedback.
 order: 3
+timeframe: "2026"
 media:
   type: image
   src: /media/user-feedback-digest.png

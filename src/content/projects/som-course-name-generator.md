@@ -2,9 +2,7 @@
 title: SOM Course Name Generator
 summary: >-
   A bigram Markov model trained on every Yale SOM course name that writes new ones, weird
-  but believable, like *Innovation In Capital & Wine*. Unigrams produced nonsense and trigrams
-  just recreated real courses, so bigrams were the sweet spot. I made it in 2020, before LLMs
-  were in widespread use, as part of Yale's CS 577 Natural Language Processing course.
+  but believable, like *Innovation In Capital & Wine*.
 order: 4
 role: Solo project
 timeframe: "2020"
