@@ -7,7 +7,7 @@ summary: >-
   image, and built a new browsing experience that finds covers that feel alike. The first model I tried (SigLIP)
   mostly read the title text, so I switched to DINOv2 for visual style and blended in a separate
   color signal. After I handed off the prototype, it shipped as Discover on fable.co.
-order: 1
+order: 2
 role: Product manager. Built the prototype end to end
 timeframe: "2026"
 stack: [Python, PyTorch, DINOv2, SigLIP, Claude API, scikit-learn]

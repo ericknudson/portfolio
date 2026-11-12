@@ -1,12 +1,17 @@
 ---
 title: Your Name in Miles
 summary: >-
-  Spell any word with letters found in my Strava GPS tracks. Each letter is one continuous
-  stretch of a real run, ride or hike. Under the hood it's a ranking problem: for each letter I
-  generate candidate stretches across 172 activities, score them by how closely they match the
-  letter's shape and by a handwriting model trained on EMNIST, then re-rank so the runners-up
-  aren't the same stretch of road. Inspired by NASA's *Your Name in Landsat*.
-order: 3
+  Strava athletes log hundreds of activities and almost never look at them again. I built this
+  tool to dig through that history and find letter-shaped route segments so that anyone can
+  spell any word with their own GPS tracks.
+
+  It's inspired by NASA's *Your Name in Landsat*, which spells your name using satellite images
+  of bizarre topographical features. The joy of that product, for me, is how it makes you
+  curious about what that E-shaped mountain range actually is. I thought the same arc could
+  work with Strava data. There are puzzles: "What is that weird Y-shaped route? Did I actually
+  do that?" Then the reveal: "Oh, that was the ride to Stinson with Sam!" The shape is a way
+  back into the day, which is a way to remember how it felt and feel some pride in what you did.
+order: 1
 role: "TODO"
 timeframe: "TODO"
 stack: [Python, PyTorch, NumPy, SciPy]

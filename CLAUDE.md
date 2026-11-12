@@ -26,14 +26,14 @@ Display order is set by `order` in frontmatter.
 
 All projects are presented equally; there is no featured case study.
 
-1. **Fable Dis*cover*** (Drift). The title is written `Fable Dis*cover*`: `*…*` in a title renders
-   as italics (`src/lib/inline.ts`); so does `*…*` in a summary.
-2. **User Feedback Digest**: anonymized. Never name the company or product domain, and never use
-   real counts, feature names or user quotes from it. The screenshot uses notional data and
-   says so in its caption.
-3. **Your Name in Miles**: present it as a **ranking system with an evaluation**: how candidates
+1. **Your Name in Miles**: present it as a **ranking system with an evaluation**: how candidates
    are generated and scored, how ranking quality was measured (metrics, baselines, test set), and
    what the results showed. The evaluation is the centerpiece, not a footnote.
+2. **Fable Dis*cover*** (Drift). The title is written `Fable Dis*cover*`: `*…*` in a title renders
+   as italics (`src/lib/inline.ts`); so does `*…*` in a summary.
+3. **User Feedback Digest**: anonymized. Never name the company or product domain, and never use
+   real counts, feature names or user quotes from it. The screenshot uses notional data and
+   says so in its caption.
 4. **SOM Course Name Generator**
 
 ### Sources
@@ -57,7 +57,7 @@ generator (commit `4f00028`, May 2022). The SOM course version is the commit bef
 - `src/layouts/ProjectLayout.astro` — case-study page: title, summary, meta (role, timeframe,
   stack, links), an optional key-results strip (`metrics`), then the Markdown body.
 - `src/pages/index.astro` — home: intro, then the project list. Each project shows its title,
-  `summary` (a short first-person overview), links and media.
+  `summary` (a short first-person overview; a blank line starts a new paragraph), links and media.
 - `src/lib/site.ts` — `showCaseStudies`. Currently `false`: the case-study pages aren't built
   and the home page links to each live site instead. The Markdown bodies are kept for later.
 - `src/pages/projects/[slug].astro` — builds one static page per project entry. Its `demos` map
