@@ -9,8 +9,8 @@ summary: >-
   of bizarre topographical features. The joy of that product, for me, is how it makes you
   curious about what that E-shaped mountain range actually is. I thought the same arc could
   work with Strava data. There are puzzles: "What is that weird Y-shaped route? Did I actually
-  do that?" Then the reveal: "Oh, that was the ride to Stinson with Sam!" The shape is a way
-  back into the day, which is a way to remember how it felt and feel some pride in what you did.
+  do that?" Then the reveal: "Oh, that was the ride to Stinson with Sam!" It's a way to
+  remember how it felt and feel some pride in what you did.
 order: 1
 role: "TODO"
 timeframe: "2026"
