@@ -1,12 +1,15 @@
 ---
 title: Fable Dis*cover*
 summary: >-
-  Most book recommendation systems lean on metadata like genre and publisher descriptions,
-  and ignore the cover, even though publishers put a lot of work into making covers signal a
-  book's vibe. I took Fable's 10,000 most-shelved books, stripped out everything but the cover
-  image, and built a new browsing experience that finds covers that feel alike. The first model I tried (SigLIP)
-  mostly read the title text, so I switched to DINOv2 for visual style and blended in a separate
-  color signal. After I handed off the prototype, it shipped as Discover on fable.co.
+  Most book recommendation systems lean heavily on metadata like genre and publisher
+  descriptions. They ignore the cover, even though publishers put a lot of work into cover art.
+  And when I go into a bookstore, the primary thing I'm doing is wandering around gauging
+  whether this or that cover art resonates with me.
+
+  As an experiment, I took Fable's 10,000 most-shelved books, ignored all the data except for
+  the cover image, and built a new browsing experience that finds covers that feel alike. The
+  first model I tried (SigLIP) mostly read the title text, so I switched to DINOv2 for visual
+  style and blended in a separate color signal.
 order: 2
 role: Product manager. Built the prototype end to end
 timeframe: "2026"
